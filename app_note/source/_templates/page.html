@@ -1,0 +1,38 @@
+{% extends "!page.html" %}
+{% block footer %}
+<div class="related-pages">
+    {% if next -%}
+    <a class="next-page" href="{{ next.link }}">
+        <div class="page-info">
+        <div class="context">
+            <span>{{ _("Next") }}</span>
+        </div>
+        <div class="title">{{ next.title }}</div>
+        </div>
+        <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+    </a>
+    {%- endif %}
+    {% if prev -%}
+    <a class="prev-page" href="{{ prev.link }}">
+        <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+        <div class="page-info">
+        <div class="context">
+            <span>{{ _("Previous") }}</span>
+        </div>
+        {% if prev.link == pathto(master_doc) %}
+        <div class="title">{{ _("Home") }}</div>
+        {% else %}
+        <div class="title">{{ prev.title }}</div>
+        {% endif %}
+        </div>
+    </a>
+    {%- endif %}
+</div>
+<div class="my-pad"></div>
+<div class="bottom-of-page-extra">
+    <div class="left-details">
+        {{ project }} (Rev. {{ version }}) | <b>cronologic</b> GmbH & Co. KG (<a href="https://www.cronologic.de/contact" target="_blank">Imprint</a>)
+    </div>
+</div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+{% endblock %}
