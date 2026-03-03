@@ -59,6 +59,8 @@ def cable_delay_test_histogram():
     ax.set_ylabel("intensity (%)")
 
     fig.savefig("../_figures/large_jitter_tdc_histogram.svg")
+    fig.savefig("output/large_jitter_tdc_histogram.png", transparent=False)
+    fig.savefig("output/large_jitter_tdc_histogram.pdf", transparent=False)
     plt.show()
 
 

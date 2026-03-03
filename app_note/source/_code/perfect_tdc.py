@@ -56,6 +56,8 @@ def cable_delay_test_histogram():
     ax.set_ylabel("intensity (%)")
 
     fig.savefig("../_figures/perfect_tdc_histogram.svg")
+    fig.savefig("output/perfect_tdc_histogram.png", transparent=False)
+    fig.savefig("output/perfect_tdc_histogram.pdf", transparent=False)
     plt.show()
 
 
