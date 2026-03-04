@@ -48,7 +48,7 @@ def cable_delay_test_histogram():
     ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0))
     mplu.set_axes_size(4, aspect=3 / 4)
 
-    ax.set_xlim(plots.XLIMS)
+    ax.set_xlim(*plots.XLIMS)
     ax.xaxis.set_major_locator(mticker.MultipleLocator(1))
     ax.set_ylim(bottom=0)
 
