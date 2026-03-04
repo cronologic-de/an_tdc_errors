@@ -1,16 +1,10 @@
-from typing import Any
-
 import numpy as np
 from numpy.typing import NDArray
 import mplutils as mplu
 import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
 
 import tdc
 import plots
-
-
-def create_frame(fname_output: str) -> None: ...
 
 
 def simulate_cable_delay_test(
@@ -28,12 +22,10 @@ def simulate_cable_delay_test(
     return values, counts
 
 
-def cable_delay_test_histogram():
-
+def main():
     plt.style.use("cronostyle.mplstyle")
 
-    layout_engine = mplu.FixedLayoutEngine()
-    fig, ax = plt.subplots(1, 1, layout=layout_engine)
+    fig, ax = plt.subplots(1, 1, layout=mplu.FixedLayoutEngine())
 
     delta_times = (95.3, 100.3, 105.3)
     jitters = (0.05, 0.1, 0.20)
@@ -45,13 +37,14 @@ def cable_delay_test_histogram():
         plots.plot_histogram(ax, values_0, counts_0, c=color, label=label)
 
     ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0))
-    mplu.set_axes_size(4, aspect=3 / 4)
 
-    ax.set_ylim(bottom=0)
+    mplu.set_axes_size(4, aspect=3 / 4)
 
     ax.axvline(97.5, color=plots.GREY, lw=0.8, ls="--")
     ax.axvline(102.5, color=plots.GREY, lw=0.8, ls="--")
+
     ax.set_xlim(*plots.XLIMS)
+    ax.set_ylim(bottom=0)
     ax.set_xticks(
         np.arange(94, 107.5, 1),
         (
@@ -76,13 +69,6 @@ def cable_delay_test_histogram():
     ax.set_ylabel("intensity (%)")
 
     fig.savefig("../_figures/small_jitter_tdc_histogram.svg")
-    fig.savefig("output/small_jitter_tdc_histogram.png", transparent=False)
-    fig.savefig("output/small_jitter_tdc_histogram.pdf", transparent=False)
-    plt.show()
-
-
-def main():
-    cable_delay_test_histogram()
 
 
 if __name__ == "__main__":

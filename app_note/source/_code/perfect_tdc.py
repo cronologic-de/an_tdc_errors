@@ -1,5 +1,3 @@
-from typing import Any
-
 import numpy as np
 from numpy.typing import NDArray
 import mplutils as mplu
@@ -8,9 +6,6 @@ import matplotlib.ticker as mticker
 
 import tdc
 import plots
-
-
-def create_frame(fname_output: str) -> None: ...
 
 
 def simulate_cable_delay_test(
@@ -22,20 +17,16 @@ def simulate_cable_delay_test(
 
     dts_measured = tdc.measure_dt(times_start, times_stop, jitter_std=0.0)
 
-    print(np.std(dts_measured))
-
     values, counts = np.unique(dts_measured, return_counts=True)
     counts = counts / n_measurements * 100
 
     return values, counts
 
 
-def cable_delay_test_histogram():
-
+def main():
     plt.style.use("cronostyle.mplstyle")
 
-    layout_engine = mplu.FixedLayoutEngine()
-    fig, ax = plt.subplots(1, 1, layout=layout_engine)
+    fig, ax = plt.subplots(1, 1, layout=mplu.FixedLayoutEngine())
 
     delta_times = (95.5, 100.3, 105.9)
     colors = (plots.BLUE, plots.ORANGE, plots.PURPLE)
@@ -46,6 +37,7 @@ def cable_delay_test_histogram():
         plots.plot_histogram(ax, values_0, counts_0, c=color, label=label)
 
     ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0))
+
     mplu.set_axes_size(4, aspect=3 / 4)
 
     ax.set_xlim(*plots.XLIMS)
@@ -56,13 +48,6 @@ def cable_delay_test_histogram():
     ax.set_ylabel("intensity (%)")
 
     fig.savefig("../_figures/perfect_tdc_histogram.svg")
-    fig.savefig("output/perfect_tdc_histogram.png", transparent=False)
-    fig.savefig("output/perfect_tdc_histogram.pdf", transparent=False)
-    plt.show()
-
-
-def main():
-    cable_delay_test_histogram()
 
 
 if __name__ == "__main__":

@@ -1,8 +1,6 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from matplotlib.axes import Axes
-
 rng = np.random.default_rng(42)
 
 
