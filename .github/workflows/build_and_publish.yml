@@ -1,0 +1,78 @@
+name: Build and publish HTML and PDF documentation
+
+on:
+  release:
+    types:
+      created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        # checkout specific branch
+        ref: main
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-frozen.txt
+
+    - name: Build documentation
+      run: |
+        make html
+
+    - name: Upload HTML to artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: html
+        path: build/html
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        # checkout specific branch
+        ref: main
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./artifacts
+
+    - name: Publish HTML
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.KEY }}
+        source: ./artifacts/html/*
+        target: ${{ secrets.TARGETHTML }}
+        strip_components: 2
+        rm: true
+
+    - name: zip application note
+      run: |
+        mkdir app_note
+        mv ./artifacts/html ./app_note/html
+        (cd app_note && zip -r ../app_note.zip .)
+
+    - name: Upload documentation as release asset
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release upload ${{ github.event.release.tag_name }} ./app_note.zip
+
