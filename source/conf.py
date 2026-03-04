@@ -18,18 +18,14 @@ release = version
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 # set up global.rst (which is executed before each .rst file)
-with open("global.rst", "r") as f:
-    prolog_file = f.read()
 rst_prolog = f"""
-{prolog_file}
-
 .. |version| replace:: {version}
 """
 
 extensions = ["sphinxcontrib.video"]
 
 templates_path = ["_templates"]
-exclude_patterns = ["global.rst", "api_reference/structs/*.rst"]
+exclude_patterns = []
 
 numfig = True
 numfig_format = {"figure": "Figure %s", "table": "Table %s"}

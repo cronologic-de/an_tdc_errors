@@ -33,7 +33,7 @@ If you want to install the most up-to-date versions of the prerequisites, use
 `requirements.txt`.
 
 If you want to install the most up-to-date versions and also install plotting libraries
-(e.g., to run Python scripts in [/app_note/_source_code/](app_note/source/_code)), use
+(e.g., to run Python scripts in [source/_code/](source/_code)), use
 `requirements-dev.txt`.
 
 ## Building
@@ -45,7 +45,7 @@ cd app_note
 make html
 ```
 
-to compile the project as HTML. The HTML output is in `app_note/build/html/`.
+to compile the project as HTML. The HTML output is in `build/html/`.
 
 ## License
 
