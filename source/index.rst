@@ -5,14 +5,14 @@ Application Note – Quantization vs. Jitter
 .. admonition:: In this App-Note
 
     In this application note, we will highlight the effects of quantization errors
-    and jitter on classic start-stop time-to-digital converters.
+    and jitter on time-to-digital converters.
     
 
 Performance Test - Measuring a constant delay
 =============================================
 
-Measuring a constant delay is a good way to test the performance of a classic
-start-stop time-to-digital converter (TDC), such as the
+Measuring a constant delay is a good way to test the performance of a
+time-to-digital converter (TDC), such as the
 `xHPTDC8 <https://www.cronologic.de/product/xhptdc8-pcie>`__,
 `xTDC4 <https://www.cronologic.de/product/xtdc4>`__,
 and `TimeTagger4 <https://www.cronologic.de/product/timetagger>`__
