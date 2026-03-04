@@ -51,7 +51,7 @@ def cable_delay_test_histogram():
 
     ax.axvline(97.5, color=plots.GREY, lw=0.8, ls="--")
     ax.axvline(102.5, color=plots.GREY, lw=0.8, ls="--")
-    ax.set_xlim(plots.XLIMS)
+    ax.set_xlim(*plots.XLIMS)
     ax.set_xticks(
         np.arange(94, 107.5, 1),
         (

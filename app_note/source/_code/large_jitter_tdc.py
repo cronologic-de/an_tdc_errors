@@ -38,7 +38,7 @@ def cable_delay_test_histogram():
     fig, ax = plt.subplots(1, 1, layout=layout_engine)
 
     dt = 100.3
-    jitters = (1.5, 2.5, 5.0)
+    jitters = (1.0, 2.5, 5.0)
     colors = (plots.BLUE, plots.ORANGE, plots.PURPLE)
     offsets = (0, -0.0, +0.0)
 
