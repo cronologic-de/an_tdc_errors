@@ -7,7 +7,7 @@ The application note discusses the difference between quantization errors and ji
 time-to-digital converters (TDCs), such as the
 [xHPTDC8](https://www.cronologic.de/product/xhptdc8-pcie),
 [xTDC4](https://www.cronologic.de/product/xtdc4), and
-[TimeTaggers](https://www.cronologic.de/product/timetagger)
+[TimeTagger](https://www.cronologic.de/product/timetagger)
 devices sold by [cronologic](https://www.cronologic.de).
 
 ## Building the application note
