@@ -253,7 +253,7 @@ the weighted average of the histogram).
 Note as well that the TDC with no DNL reaches the true *dT* with fewer
 measurements.
 
-.. video:: _figures/fixed_vs_variable_binsize_100dpi.mp4
+.. video:: _figures/fixed_vs_variable_binsize_100dpi_with_average.mp4
     :align: center
     :autoplay:
     :loop:
