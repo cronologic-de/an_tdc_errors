@@ -1,7 +1,14 @@
 # an_tdc_errors
 
 In this repository are the sources from which the application note available at
-[docs.cronologic.de/app_notes/tdc_errors](https://docs.cronologic.de/app_notes/tdc_errors)
+[docs.cronologic.de/app_notes/tdc_errors](https://docs.cronologic.de/app_notes/tdc_errors).
+
+The application note discusses the difference between quantization errors and jitter of
+time-to-digital converters (TDCs), such as the
+[xHPTDC8](https://www.cronologic.de/product/xhptdc8-pcie),
+[xTDC4](https://www.cronologic.de/product/xtdc4), and
+[TimeTagger](https://www.cronologic.de/product/timetagger)
+devices sold by [cronologic](https://www.cronologic.de).
 
 ## Building the application note
 
