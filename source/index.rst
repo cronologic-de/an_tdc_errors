@@ -56,24 +56,23 @@ absolutely no jitter is present.
 Such a TDC quantizes continuous times perfectly into discrete bins
 (here, of bin size 1).
 
-Let's consider an example, where we want to measure a constant delay of,
-let's say, *ΔT* = 100.3.
+As an example, let's say we want to measure a constant delay of *dT* = 100.3.
 Using asynchronous (to the TDC's reference clock) start times *t*\ :sub:`start` means
-that the start times are effectively random.
-The stop times are fixed at *t*\ :sub:`stop` = *t*\ :sub:`start` + *ΔT*.
+that the start times are effectively random, but the stop times are fixed
+at *t*\ :sub:`stop` = *t*\ :sub:`start` + *dT*.
 
-In our example of *ΔT* = 100.3, we will get two possible measurements:
+In our example of *dT* = 100.3, we will get two possible measurements:
 100 and 101. To understand this, consider the following two start times
 
 **Example 1:** *t*\ :sub:`start` = 0.1 and *t*\ :sub:`stop` = 0.1 + 100.3 = 100.4
     Due to the quantization of times into bins of size 1, the TDC will measure
     *t*\ :sub:`start,TDC` = 0, *t*\ :sub:`stop,TDC` = 100,
-    and *ΔT*\ :sub:`TDC` = 100 – 0 = **100**.
+    and *dT*\ :sub:`TDC` = 100 – 0 = **100**.
 
 **Example 2**: *t*\ :sub:`0` = 0.9 and *t*\ :sub:`1` = 0.9 + 100.3 = 101.2
     Now
     *t*\ :sub:`start,TDC` = 0, *t*\ :sub:`stop,TDC` = 101,
-    and *ΔT*\ :sub:`TDC` = 101 – 0 = **101**.
+    and *dT*\ :sub:`TDC` = 101 – 0 = **101**.
     
 Note that in the two examples above, there are *no error sources besides the
 quantization error*.
@@ -82,7 +81,7 @@ the delay is an *exact* multiple of the bin size) and the relative intensity of 
 values depends on the actual delay.
 
 The following graphic shows the final histogram after simulating
-one million measurements of various *ΔT* with a perfect TDC.
+one million measurements of various *dT* with a perfect TDC.
 As one can see, the relative intensity of the bins changes, but there are always two
 bins in the histogram.
 
@@ -92,55 +91,60 @@ bins in the histogram.
 
 Note that from the above histogram, one cannot estimate the error that results from
 general jitter, as the histogram is purely the result of the quantization.
-For example, the standard deviation of the blue data (with *ΔT* = 95.5) is 0.5,
+For example, the standard deviation of the blue data (with *dT* = 95.5) is 0.5,
 however, timing errors due to general jitter are *zero*
 (as per definition of the simulation).
 
 .. _case2:
 
-Case 2 - TDC dominated by quantization error
-============================================
 
-Let's now consider a TDC that is dominated by the quantization error.
-Our simulation is identical to :ref:`Case 1 <case1>`
-except that now, before the real times are quantized, a small
-(compared to the bin size) jitter is added to them.
-
-In particular, the jitter follows a normal distribution with a standard deviation
-of 5, 10, and 20% of the bin size.
-
-The resulting histograms are shown in the following graphic.
-
-One can see that at 5%,
-the histogram is virtually identical to the ideal case shown above. With increasing
-jitter, more output values appear, however, qualitatively, the histograms still
-resemble the ideal case.
-
-.. image:: _figures/small_jitter_tdc_histogram.svg
-    :align: center
-    :alt: Constant-delay histogram of a TDC dominated by quantization error.
-
-Case 3 - TDC dominated by jitter
+Case 2 - TDC dominated by jitter
 ================================
 
-Increasing the jitter ultimately yields histograms that are dominated by it.
+Let us now consider a TDC that has comparably (to the bin size) large jitter.
 
-In the following figure, measurement of a constant delay of 100.3 is simulated
-multiple times with the same method as in :ref:`Case 2 <case2>`, but
-with jitter magnitudes comparable or much larger than the binsize.
+In the following figure, a simulation of many TDC measurements of a constant delay of
+100.3 are shown with increasing jitter.
+This is done by adding random errors to *t*\ :sub:`start` and *t*\ :sub:`stop` before
+measuring them.
+The random errors follow a normal distribution with standard deviations of
+100%, 250%, and 350% of the binsize.
 
 .. image:: _figures/large_jitter_tdc_histogram.svg
     :align: center
     :alt: Constant-delay histogram of a TDC dominated by jitter.
 
-Note that, as these histograms are dominated by the jitter and *not* the quantization
-error, one can estimate the magnitude of the jitter from the histograms. For example,
+These histograms are dominated by the jitter and *not* the quantization error.
+They look completely different as the histograms shown in :ref:`Case 1 <case1>`.
+
+Since these histograms are dominated by the jitter and *not* the quantization
+error, one can estimate the magnitude of the jitter from them. For example,
 the standard deviation of the purple histogram data
 (with :math:`\sigma_{\mathrm{Jitter}}` = 500%) is :math:`\sigma_{\mathrm{Hist}}` = 708%,
 close to the expectation of :math:`\sqrt{2} \times \sigma_{\mathrm{Jitter}}` 
 (since the TDC performs two measurements, start and stop, the jitter
 applies twice, ergo the expected standard deviation of the histogram data is a
 factor :math:`\sqrt{2}` larger than the standard deviation of the jitter).
+
+.. _case3:
+
+Case 3 - TDC dominated by quantization error
+============================================
+
+Let's now decrease the jitter to be much smaller than the bin size of the TDC.
+
+In the following figure, measurement of a constant delay of 100.3 is simulated
+multiple times with the same method as in :ref:`Case 2 <case2>`, but
+with random errors of 5%, 10%, and 20% of the bin size.
+
+One can see that at 5%, the histogram is virtually identical to the ideal
+:ref:`Case 1 <case1>` shown above.
+With increasing jitter, more output values appear, but,
+qualitatively, the histograms still resemble the ideal case.
+
+.. image:: _figures/small_jitter_tdc_histogram.svg
+    :align: center
+    :alt: Constant-delay histogram of a TDC dominated by quantization error.
 
 
 Choosing a data bin size
@@ -156,7 +160,8 @@ Choosing a data bin size
     The *data bin size* refers to the code numbers that are output to the user.
 
 When designing a TDC, a manufacturer needs to choose a step size of the output data,
-that is, what output codes of the device correspond to what delta times.
+that is, what *output codes* of the device correspond to what *delta times* in
+real life.
 This is often referred to as LSB (for Least Significant Bit).
 It tells us what delta time corresponds to the smallest change in the TDC output code.
 For example, for cronologic's `xTDC4 <https://www.cronologic.de/product/xtdc4>`__,
@@ -197,7 +202,7 @@ The DNL quantifies the size variation of consecutive bins. The INL corresponds t
 the mismatch of measured delta times assuming a constant bin size to real delta times.
 
 One can measure the DNL and INL of a real TDC (for example, with a code density test),
-an calibrate it.
+and then calibrate it.
 
 Ergo, the errors resulting from the TDC's DNL/INL can be corrected for,
 which makes these errors different from other timing jitter.
@@ -229,9 +234,9 @@ bin size.
 Animation of the measurement principle
 ======================================
 
-On the left, the constant delay *ΔT* is represented by a blue ruler with fixed length.
+On the left, the constant delay *dT* is represented by a blue ruler with fixed length.
 The start (and stop) times increase continuously and are quantized by the TDC.
-The resulting *measured* *ΔT* is shown by the orange double-arrow above the ruler.
+The resulting *measured* *dT* is shown by the orange double-arrow above the ruler.
 
 On the right, a histogram of continuously measured delay times is shown.
 
@@ -239,6 +244,14 @@ The top row of the animation represents a perfect TDC with perfect DNL.
 Each time gets sorted correctly into perfectly sized bins.
 
 The bottom row represents a TDC with significant DNL but smaller data bin size.
+
+One can see that after many measurements, the histogram of the lower case looks
+smoother, as more bins are filled.
+Both cases, however, ultimately measure the same *dT*
+(as shown by  ⟨*dT* ⟩ above the histogram, which is
+the weighted average of the histogram).
+Note as well that the TDC with no DNL reaches the true *dT* with fewer
+measurements.
 
 .. video:: _figures/fixed_vs_variable_binsize_100dpi_with_average.mp4
     :align: center
@@ -248,10 +261,12 @@ The bottom row represents a TDC with significant DNL but smaller data bin size.
     :poster: _figures/animation_first_frame.png
     :alt: Animation showing the difference between large and small DNL TDCs
 
-Note that in this representation, the binsize is absolutely known, that is, no jitter
+In this representation, the binsize is absolutely known, that is, no jitter
 is present. One could, as was done at the beginning of this application note, interpret
 the lower row of the animation as a TDC with significant jitter, which means that,
-effectively, the binsize is unknown.
+effectively, the binsize is unknown. In this interpretation, the quantization
+error corresponds to the average bin size, while jitter is corresponds to the random
+distribution of bin sizes.
 
 TDCs from cronologic
 ====================
@@ -266,15 +281,16 @@ In return, our TDCs do not introduce significant error other than the quantizati
 error. This becomes apparent in the following histograms of a constant-delay test.
 
 As one can see, the general shape of the histograms closely resembles those shown 
-in :ref:`Case 2<case2>`: Our TDCs are dominated by quantization errors, not by other
+in :ref:`Case 3<case3>`: Our TDCs are dominated by quantization errors, not by other
 jitter.
 
 .. image:: _figures/cable_delay_hist_xTDC4.svg
     :alt: Cable delay test histogram of cronologic's xTDC4
     :align: center
 
-The errors present in TimeTagger series are almost exclusively quantization errors,
-as becomes apparent in the following histograms.
+The errors present in `TimeTagger <https://www.cronologic.de/product/timetagger>`__
+series are almost exclusively quantization errors,
+as becomes apparent from the following histograms.
 
 .. image:: _figures/cable_delay_tests_TT4.svg
     :alt: Cable delay test histograms of cronologic's TimeTagger series.

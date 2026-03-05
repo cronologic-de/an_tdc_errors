@@ -33,7 +33,7 @@ def main():
 
     for dt_real, color in zip(delta_times, colors):
         values_0, counts_0 = simulate_cable_delay_test(dt_real, 1_000_000)
-        label = rf"$\Delta T$ = {dt_real:.1f}"
+        label = rf"$dT$ = {dt_real:.1f}"
         plots.plot_histogram(ax, values_0, counts_0, c=color, label=label)
 
     ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0))
