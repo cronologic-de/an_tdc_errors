@@ -60,7 +60,7 @@ jobs:
                   username: ${{ secrets.USERNAME }}
                   port: ${{ secrets.PORT }}
                   key: ${{ secrets.KEY }}
-                  source: "artifacts/html"
+                  source: ./artifacts/**
                   target: ${{ secrets.TARGETHTML }}
                   strip_components: 2
                   rm: true
