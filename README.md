@@ -10,27 +10,11 @@ time-to-digital converters (TDCs), such as the
 [TimeTagger](https://www.cronologic.de/product/timetagger)
 devices sold by [cronologic](https://www.cronologic.de).
 
-## Building the application note
-
 ## Prerequisites
 
 Python is necessary for creating the HTML output.
 
-Optionally, create and activate a virtual environment
-
-```shell
-python -m venv .venv
-. .\.venv\Scripts\activate
-```
-
-Depending on your operating system, you may need to run a different activation script.
-
-The requirements are listed in `requirements.txt`, `requirements-frozen.txt`, and
-`requirements-dev.txt`.
-
-If you want to guarantee the output to be the same as hosted at
-[docs.cronologic.de](https://docs.cronologic.de/app_notes/tdc_errors), install the
-packages listed in `requirements-frozen.txt`, that is, run
+Dependencies are managed using [uv](https://docs.astral.sh/uv).
 
 ```shell
 pip install -r requirements-frozen.txt
@@ -48,7 +32,6 @@ If you want to install the most up-to-date versions and also install plotting li
 Run
 
 ```shell
-cd app_note
 make html
 ```
 

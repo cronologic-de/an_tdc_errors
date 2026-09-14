@@ -6,8 +6,21 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-with open("version.txt") as f:
-    version = f.read()
+import pathlib
+import tomllib
+
+
+def get_version() -> str:
+    pyproject = pathlib.Path("../pyproject.toml")
+    if pyproject.exists():
+        with pyproject.open("rb") as f:
+            data = tomllib.load(f)
+        return data.get("project", {}).get("version")
+    return "0"
+
+
+version = get_version()
+
 
 project = "Quantization vs. Jitter\nApplication Note"
 copyright = "2026, cronologic GmbH & Co. KG"
