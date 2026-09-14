@@ -69,7 +69,7 @@ html_theme_options = {
         "color-first-header": cronoorange,
     },
     "light_css_variables": {
-        "font-stack": "Montserrat, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
+        "font-stack": "montserrat, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji",
         "font-stack--monospace": "Consolas, Monaco, Liberation Mono, Lucida Console, monospace",
         "color-foreground-primary": cronogrey,
         "color-headers": "#000000",
