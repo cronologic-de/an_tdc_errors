@@ -50,6 +50,9 @@ jobs:
               with:
                   path: ./artifacts
 
+            - name: Inspect artifact layout
+              run: ls -laR artifacts
+
             - name: Publish HTML
               uses: appleboy/scp-action@v1
               with:
@@ -57,7 +60,7 @@ jobs:
                   username: ${{ secrets.USERNAME }}
                   port: ${{ secrets.PORT }}
                   key: ${{ secrets.KEY }}
-                  source: artifacts/html/**
+                  source: "artifacts/html"
                   target: ${{ secrets.TARGETHTML }}
                   strip_components: 2
                   rm: true
