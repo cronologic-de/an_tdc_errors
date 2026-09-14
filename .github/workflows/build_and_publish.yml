@@ -52,7 +52,7 @@ jobs:
         path: ./artifacts
 
     - name: Publish HTML
-      uses: appleboy/scp-action@1
+      uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
